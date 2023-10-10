@@ -54,7 +54,7 @@ var setStims = function() {
 }
 
 var getTestText = function() {
-  return '<div class = centerbox><div class = center-text>' + num_digits + ' Digits</p></div>'
+  return '<div class = centerbox><div class = center-text>' + num_digits + ' Ziffern</p></div>'
 }
 
 var getStims = function() {
@@ -117,8 +117,8 @@ var response_grid =
   '<button id = button_7 class = "square num-button" onclick = "recordClick(this)"><div class = content><div class = numbers>7</div></div></button>' +
   '<button id = button_8 class = "square num-button" onclick = "recordClick(this)"><div class = content><div class = numbers>8</div></div></button>' +
   '<button id = button_9 class = "square num-button" onclick = "recordClick(this)"><div class = content><div class = numbers>9</div></div></button>' +
-  '<button class = clear_button id = "ClearButton" onclick = "clearResponse()">Clear</button>' +
-  '<button class = submit_button id = "SubmitButton">Submit Answer</button></div>'
+  '<button class = clear_button id = "ClearButton" onclick = "clearResponse()">Löschen</button>' +
+  '<button class = submit_button id = "SubmitButton">Antwort übermitteln</button></div>'
 
 /* ************************************ */
 /* Set up jsPsych blocks */
@@ -147,15 +147,15 @@ var post_task_block = {
    data: {
        trial_id: "post task questions"
    },
-   questions: ['<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
-              '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'],
+   questions: ['<p class = center-block-text style = "font-size: 20px">Bitte fassen Sie zusammen, was die Aufgabe in diesem Experiment war!</p>',
+              '<p class = center-block-text style = "font-size: 20px">Haben Sie Kommentare zu dieser Aufgabe?</p>'],
    rows: [15, 15],
    columns: [60,60]
 };
 
 /* define static blocks */
 var feedback_instruct_text =
-  'Welcome to the experiment. This experiment will take less than 10 minutes. Press <strong>enter</strong> to begin.'
+  'Willkommen zu diesem Experiment. Dieses Experiment wird weniger als 10 Minuten dauern. Drücken Sie die <strong>Eingabetaste</strong> zum anfangen.'
 var feedback_instruct_block = {
   type: 'poldrack-text',
   cont_key: [13],
@@ -173,7 +173,7 @@ var instructions_block = {
     trial_id: "instruction"
   },
   pages: [
-'<div class = centerbox><p class = block-text>In this test you will have to try to remember a sequence of numbers that will appear on the screen one after the other. At the end of each trial, enter all the numbers into the presented numpad in the sequence in which they occurred. Do your best to memorize the numbers, but do not write them down or use any other external tool to help you remember them.</p><p class = block-text>Trials will start after you end instructions.</p></div>'
+'<div class = centerbox><p class = block-text>In dieser Aufgabe müssen Sie sich eine Reihe von Ziffern merken, welche nacheinander auf dem Bildschirm erscheinen werden. Geben Sie nach jeder Aufgabe alle Ziffern im dann gezeigten Tastenfeld in der präsentierten Reihenfolge ein. Geben Sie Ihr Bestes um sich alle Ziffern zu merken, aber schreiben Sie nichts auf und benutzen Sie keine Hilfsmittel.</p><p class = block-text>Trials will start after you end instructions.</p></div>'
  ],
   allow_keys: false,
   show_clickable_nav: true,
@@ -192,11 +192,11 @@ var instruction_node = {
     }
     if (sumInstructTime <= instructTimeThresh * 1000) {
       feedback_instruct_text =
-        'Read through instructions too quickly.  Please take your time and make sure you understand the instructions.  Press <strong>enter</strong> to continue.'
+        'Sie haben die Instrukionen nicht lange genug angeschaut.  Bitte nehmen Sie sich Zeit um sicherzugehen, dass Sie die Instruktionen genau verstanden haben.  Drücken Sie die <strong>Eingabetaste</strong> um fortzufahren.'
       return true
     } else if (sumInstructTime > instructTimeThresh * 1000) {
       feedback_instruct_text =
-        'Done with instructions. Press <strong>enter</strong> to continue.'
+        'Ende der Instruktionen. Drücken Sie die <strong>Eingabetaste</strong> um fortzufahren.'
       return false
     }
   }
@@ -209,7 +209,7 @@ var end_block = {
     trial_id: "end",
     exp_id: 'digit_span'
   },
-  text: '<div class = centerbox><p class = center-block-text>Thanks for completing this task!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
+  text: '<div class = centerbox><p class = center-block-text>Vielen Dank für die Bearbeitung dieser Aufgabe!</p><p class = center-block-text>Drücken Sie die <strong>Eingabetaste</strong> um fortzufahren.</p></div>',
   cont_key: [13],
   timing_post_trial: 0
 };
@@ -235,10 +235,10 @@ var start_reverse_block = {
   data: {
     trial_id: "start_reverse"
   },
-  text: '<div class = centerbox><p class = block-text>In these next trials, instead of reporting back the sequence you just saw, report the <strong>reverse</strong> of that sequence. So the last item should be first in your response, the second to last should be the second in your response, etc...</p><p class = block-text>Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = block-text>In den folgenden Aufgaben, anstatt die präsentierte Reihenfolge der Ziffern einzugeben, geben Sie die <strong>umgekehrte</strong> Reihenfolge ein. Die letzte Ziffer sollte also Ihre erste Antwort sein, die zweitletzte Ziffer Ihre zweite Antwort, usw...</p><p class = block-text>Drücken Sie die <strong>Eingabetaste</strong> um fortzufahren.</p></div>',
   cont_key: [13],
   on_finish: function() {
-  	errors = 0
+    errors = 0
     num_digits = 3
     stims = setStims()
   }
@@ -288,7 +288,7 @@ var forward_response_block = {
       // staircase
     if (arraysEqual(response, curr_seq)) {
       num_digits += 1
-      feedback = '<span style="color:green">Correct!</span>'
+      feedback = '<span style="color:green">Korrekt!</span>'
       stims = setStims()
       correct = true
     } else {
@@ -297,7 +297,7 @@ var forward_response_block = {
         num_digits -= 1
         errors = 0
       }
-      feedback = '<span style="color:red">Incorrect</span>'
+      feedback = '<span style="color:red">Falsch</span>'
       stims = setStims()
     }
     jsPsych.data.addDataToLastTrial({
@@ -327,7 +327,7 @@ var reverse_response_block = {
       // staircase
     if (arraysEqual(response.reverse(), curr_seq)) {
       num_digits += 1
-      feedback = '<span style="color:green">Correct!</span>'
+      feedback = '<span style="color:green">Korrekt!</span>'
       stims = setStims()
       correct = true
     } else {
@@ -336,7 +336,7 @@ var reverse_response_block = {
         num_digits -= 1
         errors = 0
       }
-      feedback = '<span style="color:red">Incorrect</span>'
+      feedback = '<span style="color:red">Falsch</span>'
       stims = setStims()
     }
     jsPsych.data.addDataToLastTrial({
@@ -364,18 +364,18 @@ var feedback_block = {
 var digit_span_experiment = [];
 digit_span_experiment.push(instruction_node);
 for (i = 0; i < num_trials ; i++ ) {
-	digit_span_experiment.push(start_test_block)
-	digit_span_experiment.push(test_block)
-	digit_span_experiment.push(forward_response_block)
-	digit_span_experiment.push(feedback_block)
+  digit_span_experiment.push(start_test_block)
+  digit_span_experiment.push(test_block)
+  digit_span_experiment.push(forward_response_block)
+  digit_span_experiment.push(feedback_block)
 }
 digit_span_experiment.push(attention_node)
 digit_span_experiment.push(start_reverse_block)
 for (i = 0; i < num_trials ; i++ ) {
-	digit_span_experiment.push(start_test_block)
-	digit_span_experiment.push(test_block)
-	digit_span_experiment.push(reverse_response_block)
-	digit_span_experiment.push(feedback_block)
+  digit_span_experiment.push(start_test_block)
+  digit_span_experiment.push(test_block)
+  digit_span_experiment.push(reverse_response_block)
+  digit_span_experiment.push(feedback_block)
 }
 digit_span_experiment.push(post_task_block)
 digit_span_experiment.push(end_block)
